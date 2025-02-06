@@ -4,8 +4,8 @@ const getTasks = (req, res) => {
 
 const setTask = (req, res) => {
   if (!req.body.text) {
-    res.status(400).json({ message: "Please enter a task" });
-    return;
+    res.status(400);
+    throw new Error("Please enter a task");
   }
 
   res.status(201).json({ message: "Create a task" });
