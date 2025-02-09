@@ -1,11 +1,12 @@
 const asyncHandler = require("express-async-handler");
 
 const registerUser = asyncHandler(async (req, res) => {
-  res.json({ message: "Register User" });
+  console.log("Register endpoint hit", req.body);
+  res.json({ message: "Register User: Successful" });
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  res.json({ message: "Login User" });
+  res.json({ message: "Login User: Successful" });
 });
 
 const currentUser = asyncHandler(async (req, res) => {
