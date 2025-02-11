@@ -32,11 +32,13 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: generateJWTtoken(user._id),
     });
   } else {
     res.status(400);
     throw new Error("Invalid user data");
   }
+
   // after starting this route use code below to test it
   // res.json({ message: "Register User: Successful" });
 });
@@ -50,6 +52,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: generateJWTtoken(user._id),
     });
   } else {
     res.status(400);
@@ -62,5 +65,9 @@ const loginUser = asyncHandler(async (req, res) => {
 const currentUser = asyncHandler(async (req, res) => {
   res.json({ message: "Current User" });
 });
+
+const generateJWTtoken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "5d" });
+};
 
 module.exports = { registerUser, loginUser, currentUser };
